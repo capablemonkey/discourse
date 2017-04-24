@@ -287,7 +287,8 @@ class UserNotifications < ActionMailer::Base
   end
 
   def self.get_context_posts(post, topic_user, user)
-    if user.user_option.email_previous_replies == UserOption.previous_replies_type[:never]
+    if (user.user_option.email_previous_replies == UserOption.previous_replies_type[:never]) ||
+       SiteSetting.secure_email?
       return []
     end
 

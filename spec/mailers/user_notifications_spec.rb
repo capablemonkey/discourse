@@ -47,7 +47,10 @@ describe UserNotifications do
       user.user_option.update_columns(email_previous_replies: UserOption.previous_replies_type[:always])
       expect(UserNotifications.get_context_posts(post3, topic_user, user).count).to eq(2)
 
+      SiteSetting.secure_email = true
+      expect(UserNotifications.get_context_posts(post3, topic_user, user).count).to eq(0)
     end
+
   end
 
   describe ".signup" do
